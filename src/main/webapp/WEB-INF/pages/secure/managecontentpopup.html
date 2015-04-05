@@ -1,0 +1,102 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span>Add Content
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="addContentDialog" novalidate role="form">
+
+				<div style="color: red" ng-bind-html-unsafe="errorMessage"></div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addContentDialog.category.$dirty && addContentDialog.category.$invalid || validateData.categoryId]">
+					<label class="control-label" for="category">Select Category
+						:</label> <select ng-model="content.categoryId" class="form-control"
+						name="category" id="category"
+						ng-options="o.categoryId as o.name for o in categories">
+						<option value="">select a category</option>
+					</select>
+				</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addContentDialog.subCategory.$dirty && addContentDialog.subCategory.$invalid || validateData.subCategoryId]"
+					ng-repeat="category in categories"
+					ng-show="content.categoryId==category.categoryId">
+					<label class="control-label" for="subCategory">Select Sub
+						Category :</label> <select ng-model="content.subCategoryId" multiple
+						class="form-control" style="height: 70px;" id="subCategory"
+						name="subCategory"
+						ng-options="o.subCategoryId as o.subCategoryName for o in category.subCategories">
+
+					</select>
+				</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addContentDialog.title.$dirty && addContentDialog.title.$invalid && !validateData.title]">
+					<label class="control-label" for="title">Title :</label> <input
+						type="text" class="form-control" name="title" id="title"
+						ng-model="content.title" value=""><span class="help-block">Enter
+						title for content.</span>
+				</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageSubCategoryDialog.contentBody.$dirty && manageSubCategoryDialog.contentBody.$invalid && !validateData.contentBody]">
+					<label class="control-label" for="contentBody">Content
+						Body:</label>
+					<textarea class="form-control" name="contentBody" id="contentBody"
+						ng-model="content.contentBody" ng-keyup="hitEnter($event)"
+						style="height: 250px;"></textarea>
+					<span class="help-block">Enter the content body.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addContentDialog.description.$dirty && addContentDialog.description.$invalid]">
+					<label class="control-label" for="file">Image Upload :</label>
+					<div ng-file-drop ng-file-select ng-model="files" class="drop-box"
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+						accept="image/*" ng-file-change="upload($files)">Drop pdfs
+						or images here or click to upload</div>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this
+						browser</div>
+					<ul>
+						<li ng-repeat="f in files" style="font: smaller">{{f.name}}</li>
+					</ul>
+					<span class="help-block">Upload Image for content</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-show="content.imageName!=null">
+					<label class="control-label" for="image"><a
+						style="color: black" ng-model="collapsedImage"
+						ng-click="collapsedImage=!collapsedImage">Image:</a></label>
+					<div class="text-info" ng-show="!collapsedImage">
+						<img src="static/images/{{content.imageName}}" width="350px;"
+							height="200px;">
+					</div>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addContentDialog.tags.$dirty && addContentDialog.tags.$invalid]">
+					<label class="control-label" for="tags">Tags :</label> <input
+						type="text" class="form-control" name="tags" id="tags"
+						ng-model="content.tags" value=""><span class="help-block">Enter
+						tags for content (Comma seprated).</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-show="content.comment!=null">
+					<label class="control-label" for="comment"><a
+						style="color: black">Comment By Admin:</a></label>
+
+					<div class="text-info">{{content.comment}}</div>
+				</div>
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary"
+					ng-click="saveContent()"
+					ng-disabled="(addCategoryDialog.$dirty && addCategoryDialog.$invalid) || addCategoryDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,170 @@
+<div class="grid-row">
+	<div class="grid-col grid-col-9">
+		<!-- blog post -->
+		<article class="widget blog-post" ng-repeat="content in contents">
+			<div class="widget-title">{{content.title}}</div>
+
+			<div class="date">
+				<div class="share">
+					<a href="#" class="fa fa-linkedin"></a> <a href="#"
+						class="fa fa-twitter"></a> <a href="#" class="fa fa-facebook"></a>
+				</div>
+				{{content.updatedDate}} <i class="fa fa-comment"><span>3</span></i>
+			</div>
+
+			<div class="pic">
+				<img src="static/images/{{category}}" alt="{{content.imageName}}"
+					ng-repeat="category in categories |categoryImage:content">
+			</div>
+
+			<div class="typography">
+
+				<p
+					style="width: 100%;; display: block; word-break: keep-all; white-space: pre-line;">{{content.contentBody
+					}}</p>
+
+
+			</div>
+
+			<div class="cats">
+				Posted in:&nbsp; |&nbsp;<span
+					ng-repeat="category in categories |contentPostedIn:content">
+					<a href="#!/searchcontent/{{category}}">{{category}} </a>&nbsp;
+					|&nbsp;
+				</span>
+			</div>
+		</article>
+		<!--/ blog post -->
+
+		<!-- comments -->
+		<section class="widget comments">
+			<div class="widget-title">{{comments.length}} Comments</div>
+
+			<ul>
+				<li ng-repeat="comment in comments">
+					<div class="avatar">
+						<i class="fa fa-user"></i>
+					</div>
+					<div class="text">
+						<div class="author">
+							<span>{{comment.fname}} {{comment.lname}}</span> &nbsp;
+							{{comment.updated}}
+						</div>
+						<p>{{comment.comment}}</p>
+					</div>
+				</li>
+
+			</ul>
+		</section>
+		<!--/ comments -->
+
+		<!-- add comment -->
+		<section class="widget add-comment">
+			<div class="widget-title">Leave a Comment</div>
+			<div ng-show="loginData.login == true">Comment as
+				{{loginData.fname}} {{loginData.lname}}</div>
+			<div ng-show="loginData.login != true">
+				Login to add comment <a
+					onclick="window.open('{{loginData.facebookLoginUrl}}','mywindow','height=400,width=400');">Login
+					with facebook</a>
+			</div>
+
+			<form ng-submit="addComment({{contentId}})"
+				ng-controller="addCommentCtr">
+				<!-- <div ng-show="loginTocomment==true" style="color: red;">
+					Please Login to add comment</div> -->
+				<textarea rows="6" placeholder="Your Message (required)"
+					ng-model="commentdata.comment" required></textarea>
+				<input type="hidden" ng-model="commentdata.contentId"
+					name="contentId" />
+				<button type="submit" class="button">Post comment</button>
+			</form>
+		</section>
+		<!--/ add comment -->
+	</div>
+
+	<div class="grid-col grid-col-3">
+		<!-- site search -->
+		<form class="widget widget-site-search" ng-submit="search()"
+			ng-controller="searchCtrl">
+			<input type="text" placeholder="Search the site" ng-model="searchkey">
+			<button type="submit" class="button">GO</button>
+		</form>
+		<!--/ site search -->
+
+		<!-- categories -->
+		<section class="widget widget-sevices">
+			<div class="widget-title">Categories</div>
+			<ul>
+				<li ng-repeat="category in categories"><i
+					class="fa fa-bookmark"></i><a
+					href="#!/articles/{{category.name}}/{{category.categoryId}}"><i
+						class="fa fa-angle-right"></i>{{category.name}}</a></li>
+
+			</ul>
+		</section>
+		<!--/ categories -->
+
+		<!-- comments -->
+		<section class="widget widget-comments" ng-show="related==true">
+			<div class="widget-title">Releated Articles</div>
+			<div id="comments-carousel" class="owl-carousel">
+				<div class="item">
+					<ul>
+						<li
+							ng-repeat="relatedContent in relatedContents.slice(relatedCount, relatedCount+5)"
+							ng-show="relatedContent.contentId != contentId"><img
+							src="static/images/{{category}}" alt="{{relatedContent.title}}"
+							ng-repeat="category in categories |categoryImage:relatedContent">
+							<div class="author">
+								<a
+									href="#!/articles/{{relatedContent.categoryId}}/{{relatedContent.title | removespaces}}/{{relatedContent.contentId}}">{{relatedContent.title
+									| limitTo : 25 : 0}}...</a>
+							</div>
+							<p>
+								{{relatedContent.contentBody | limitTo : 75 : 0}} <a>...
+									Read More</a><br> <span class="date">{{relatedContent.updatedDate}}</span>
+							</p></li>
+
+					</ul>
+					<div width="100%;" style="margin-top: 5px; margin-bottom: 5px;">
+						<div width="50%;" style="float: left;" ng-show="relatedCount > 1">
+							<a ng-click="relatedCount=relatedCount-5">Prev</a>
+						</div>
+						<div width="50%;" style="float: right;"
+							ng-show="relatedCount<relatedTotal || (relatedCount  > relatedTotal+3)">
+							<a ng-click="relatedCount=relatedCount+5">Next</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ comments -->
+
+		<!-- archives -->
+		<section class="widget widget-archives">
+			<div class="widget-title">Archives</div>
+			<ul>
+				<li ng-repeat><a href="#"><i class="fa fa-calendar"></i>May
+						2014</a></li>
+			</ul>
+		</section>
+		<!--/ archives -->
+
+
+		<!-- tags -->
+		<section class="widget widget-tags">
+			<div class="widget-title">Tags</div>
+			<ul>
+				<li ng-repeat="content in contents"><a href="#"
+					ng-repeat="tag in content.tags">{{tag}}</a></li>
+
+				<li ng-repeat="category in categories"><a href="#"
+					ng-repeat="tag in category.tags">{{tag}}</a></li>
+
+			</ul>
+		</section>
+		<!--/ tags -->
+
+	</div>
+</div>

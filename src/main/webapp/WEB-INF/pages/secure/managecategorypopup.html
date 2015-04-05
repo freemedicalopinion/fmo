@@ -1,0 +1,71 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span> Add Category
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="addCategoryDialog" novalidate role="form">
+				<div style="color: red">{{errorMessage}}</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addCategoryDialog.name.$dirty && addCategoryDialog.name.$invalid || !isUnique]">
+					<label class="control-label" for="name">Category Name:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="category.name" value="" required><span
+						class="help-block">Enter Category Name.</span>
+				</div>
+				
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addCategoryDialog.file.$dirty && addCategoryDialog.file.$invalid]">
+					<label class="control-label" for="file">Image Upload :</label>
+					<div ng-file-drop ng-file-select ng-model="files" class="drop-box"
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+						accept="image/*" ng-file-change="upload($files)">Drop pdfs
+						or images here or click to upload</div>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this
+						browser</div>
+					<ul>
+						<li ng-repeat="f in files" style="font: smaller">{{f.name}}</li>
+					</ul>
+					<span class="help-block">Upload Image for content</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-show="category.imageName!=null">
+					<label class="control-label" for="image"><a
+						style="color: black" ng-model="collapsedImage"
+						ng-click="collapsedImage=!collapsedImage">Image:</a></label>
+					<div class="text-info" ng-show="!collapsedImage">
+						<img src="static/images/{{category.imageName}}" width="350px;"
+							height="200px;">
+					</div>
+				</div>
+				
+				
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addCategoryDialog.tags.$dirty && addCategoryDialog.tags.$invalid]">
+					<label class="control-label" for="tags">Tags:</label><input
+						type="text" class="form-control" name="tags" id="tags"
+						ng-model="category.tags" ><span class="help-block">Enter
+						tags comma separated.</span> <input type="hidden"
+						ng-model="category.categoryId">
+				</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[addCategoryDialog.description.$dirty && addCategoryDialog.description.$invalid]">
+					<label class="control-label" for="description">Description:</label>
+					<textarea class="form-control" name="description" id="description"
+						ng-model="category.description" ng-keyup="hitEnter($event)"></textarea>
+					<span class="help-block">Enter the description for Category.</span>
+				</div>
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="save()"
+					ng-disabled="(addCategoryDialog.$dirty && addCategoryDialog.$invalid) || addCategoryDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

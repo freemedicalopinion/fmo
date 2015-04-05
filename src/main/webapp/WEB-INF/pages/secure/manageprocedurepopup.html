@@ -1,0 +1,44 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span> Add Procedure
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="manageProcedureDialog" novalidate role="form">
+				<div style="color: red">{{errorMessage}}</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.name.$dirty && manageProcedureDialog.name.$invalid || !isUnique]">
+					<label class="control-label" for="name">Procedure Name:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="procedure.procedureName" value="" required><span
+						class="help-block">Enter Procedure Name.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.tags.$dirty && manageProcedureDialog.tags.$invalid]">
+					<label class="control-label" for="tags">Tags:</label><input
+						type="text" class="form-control" name="tags" id="tags"
+						ng-model="procedure.tags"><span class="help-block">Enter
+						tags comma separated.</span> <input type="hidden"
+						ng-model="specility.specilityId">
+				</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.description.$dirty && manageProcedureDialog.description.$invalid]">
+					<label class="control-label" for="description">Description:</label>
+					<textarea class="form-control" name="description" id="description"
+						ng-model="procedure.description" ng-keyup="hitEnter($event)"></textarea>
+					<span class="help-block">Enter the description for Category.</span>
+				</div>
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="save()"
+					ng-disabled="(manageProcedureDialog.$dirty && manageProcedureDialog.$invalid) || manageProcedureDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,154 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span> Manage Hospital
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="manageProcedureDialog" novalidate role="form">
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.name.$dirty && manageProcedureDialog.name.$invalid]">
+					<label class="control-label" for="name">Hospital Name:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="hospital.hospitalName" value="" required><span
+						class="help-block">Enter Hospital Name.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.file.$dirty && manageProcedureDialog.file.$invalid]">
+					<label class="control-label" for="file">Logo Upload :</label>
+					<div ng-file-drop ng-file-select ng-model="files" class="drop-box"
+						drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+						accept="image/*" ng-file-change="upload($files)">Drop pdfs
+						or images here or click to upload</div>
+					<div ng-no-file-drop>File Drag/Drop is not supported for this
+						browser</div>
+					<ul>
+						<li ng-repeat="f in files" style="font: smaller">{{f.name}}</li>
+					</ul>
+					<span class="help-block">Upload Logo for hospital</span>
+				</div>
+
+				<div class="form-group input-group-lg" ng-show="hospital.logo!=null">
+					<label class="control-label" for="image"><a
+						style="color: black" ng-model="collapsedImage"
+						ng-click="collapsedImage=!collapsedImage">Logo:</a></label>
+					<div class="text-info" ng-show="!collapsedImage">
+						<img src="static/images/{{hospital.logo}}" width="150px;"
+							height="150px;">
+					</div>
+				</div>
+
+
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.description.$dirty && manageProcedureDialog.description.$invalid]">
+					<label class="control-label" for="description">About
+						Hospital:</label>
+					<textarea class="form-control" name="description" id="description"
+						ng-model="hospital.aboutHospital" ng-keyup="hitEnter($event)"></textarea>
+					<span class="help-block">Enter the description for hospital.</span>
+				</div>
+
+
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.procedures.$dirty && manageProcedureDialog.procedures.$invalid || validateData.subCategoryId]">
+					<label class="control-label" for="procedures">Services /
+						Procedures :</label> <select ng-model="hospital.procedures" multiple
+						class="form-control" style="height: 70px;" id="procedures"
+						name="procedures"
+						ng-options="o.procedureId as o.procedureName for o in listOfProcedure">
+					</select>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.name.$dirty && manageProcedureDialog.name.$invalid]">
+					<label class="control-label" for="name">Address:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="hospital.address.address" value="" ><span
+						class="help-block">Address of hospital.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.country.$dirty && manageProcedureDialog.country.$invalid]">
+					<label class="control-label" for="country">Country :</label><select
+						class="form-control" name="country" id="country"
+						ng-model="hospital.address.country" value="" 
+						ng-options="o.countryId as o.countryName for o in listofcountry"
+						ng-change='selectedCountry()'></select><span class="help-block">Country
+						of hospital.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.state.$dirty && manageProcedureDialog.state.$invalid]">
+					<label class="control-label" for="state">State :</label><select
+						class="form-control" name="state" id="state"
+						ng-model="hospital.address.state" value="" 
+						ng-options="o.stateId as o.stateName for o in states"
+						ng-change='selectedState()' ng-init='selectedCountry()'ng-change='selectedState()'></select><span class="help-block">State
+						of hospital.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.city.$dirty && manageProcedureDialog.city.$invalid]">
+					<label class="control-label" for="city">City :</label><select
+						class="form-control" name="city" id="city"
+						ng-model="hospital.address.city" value="" 
+						ng-options="o.cityId as o.cityName for o in cities"  ng-init='selectedState()'>
+					</select><span class="help-block">City of hospital.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.contactNo.$dirty && manageProcedureDialog.contactNo.$invalid]">
+					<label class="control-label" for="contactNo">Contact:</label><input
+						type="text" class="form-control" name="contactNo" id="contactNo"
+						ng-model="hospital.contactNo" value="" ><span
+						class="help-block">Contact numbers comma seprated.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.faxNo.$dirty && manageProcedureDialog.faxNo.$invalid]">
+					<label class="control-label" for="faxNo">Fax:</label><input
+						type="text" class="form-control" name="faxNo" id="faxNo"
+						ng-model="hospital.faxNo" value="" ><span
+						class="help-block">Fax Numbers comma seprated.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.website.$dirty && manageProcedureDialog.website.$invalid]">
+					<label class="control-label" for="website">Website:</label><input
+						type="text" class="form-control" name="website" id="website"
+						ng-model="hospital.website" value="" ><span
+						class="help-block">Website of Hospital.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.fbLink.$dirty && manageProcedureDialog.fbLink.$invalid]">
+					<label class="control-label" for="fbLink">Facebook page
+						URL:</label><input type="text" class="form-control" name="fbLink"
+						id="fbLink" ng-model="hospital.fbLink" value="" ><span
+						class="help-block">Facebook profile address.</span>
+				</div>
+
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageProcedureDialog.twitterLink.$dirty && manageProcedureDialog.twitterLink.$invalid]">
+					<label class="control-label" for="twitterLink">Twitter URL:</label><input
+						type="text" class="form-control" name="twitterLink"
+						id="twitterLink" ng-model="hospital.twitterLink" value="" ><span
+						class="help-block">Twitter profile address.</span>
+				</div>
+
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="save()"
+					ng-disabled="(manageProcedureDialog.$dirty && manageProcedureDialog.$invalid) || manageProcedureDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

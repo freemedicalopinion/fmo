@@ -1,0 +1,130 @@
+<section class="content">
+	<!-- MAILBOX BEGIN -->
+	<div class="mailbox row">
+		<div class="col-xs-12">
+			<div class="box box-solid">
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-4">
+							<!-- BOXES are complex enough to move the .box-header around.
+                                                 This is an example of having the box header within the box body -->
+							<div class="box-header">
+								<i class="fa fa-inbox"></i>
+								<h3 class="box-title">Manage Content</h3>
+							</div>
+							<!-- compose message btn -->
+							<a class="btn btn-block btn-primary"
+								ng-controller="manageContent" ng-click="launch('create')"><i
+								class="fa fa-pencil"></i> Add Content</a>
+							<!-- Navigation - folders-->
+							<div style="margin-top: 15px;">
+								<ul class="nav nav-pills nav-stacked">
+									<li class="header">Categories</li>
+									
+									<li ng-repeat="category in categories"
+										ng-class="{active:category.categoryId==$parent.activeCategory}"><a
+										href="#" ng-click="$parent.activeCategory=category.categoryId"
+										onclick="return false;"> <i class="fa fa-inbox"></i>
+											{{category.name}}
+									</a></li>
+
+								</ul>
+							</div>
+						</div>
+						<!-- /.col (LEFT) -->
+						<div class="col-md-9 col-sm-8">
+							<div class="row pad">
+								<div class="col-sm-6">
+									<label style="margin-right: 10px;">
+										<div class="icheckbox_minimal-blue" aria-checked="false"
+											aria-disabled="false" style="position: relative;">
+											<input type="checkbox" id="check-all"
+												style="position: absolute; opacity: 0;">
+											<ins class="iCheck-helper"
+												style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+										</div>
+									</label>
+
+
+								</div>
+								<div class="col-sm-6 search-form">
+									<form action="#" class="text-right">
+										<div class="input-group">
+											<input type="text" class="form-control input-sm"
+												placeholder="Search" ng-model="searchKeyword">
+											<div class="input-group-btn">
+												<button name="q"
+													class="btn btn-sm btn-primary">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- /.row -->
+
+							<div class="box-body table-responsive no-padding">
+								<table class="table table-hover">
+									<tbody>
+										<tr>
+
+											<th>Date</th>
+											<th>Status</th>
+											<th>Title</th>
+											<th>Action</th>
+										</tr>
+										<tr ng-repeat="content in listOfContent   | filter: searchKeyword"
+											ng-show="content.categoryId==$parent.activeCategory">
+
+											<td>{{content.updatedDate}}</td>
+											<td><span
+												ng-class="{'label-success' : content.status=='APPROVED', 'label-danger' : content.status=='REJECTED', 'label-warning':content.status=='PENDING_APPROVAL','label-primary':content.status=='NEW'}"
+												class="label ">{{content.status}}</span></td>
+											<td>{{content.title}}</td>
+											<td><a ng-controller="manageContent"
+												ng-click="launch('create',content)"><i
+													class="fa fa-edit" title="edit this content"></i></a> <span
+												ng-show="content.status !='APPROVED'">|<a
+													ng-controller="manageContent"
+													ng-click="launch('delete',content)"> <i
+														class="fa fa-trash-o" title="delete this content"></i></a></span> <span
+												ng-show="content.status !='APPROVED' && content.status !='PENDING_APPROVAL'">|<a
+													ng-controller="manageContent"
+													ng-click="launch('publish',content)"> <i
+														class="fa fa-rss" title="publish this content"></i></a></span></td>
+
+											
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.col (RIGHT) -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<div class="pull-right">
+						<small>Showing 1-12/1,240</small>
+						<button class="btn btn-xs btn-primary">
+							<i class="fa fa-caret-left"></i>
+						</button>
+						<button class="btn btn-xs btn-primary">
+							<i class="fa fa-caret-right"></i>
+						</button>
+					</div>
+				</div>
+				<!-- box-footer -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col (MAIN) -->
+	</div>
+	<!-- MAILBOX END -->
+
+</section>

@@ -1,0 +1,102 @@
+
+<div class="grid-row" ng-controller="CategoryHomeCtrl">
+	<div class="grid-col grid-col-9">
+		<!-- philosophy -->
+		<section>
+			<div ng-repeat="content in contents |limitTo:1">
+				<div class="widget-title">
+					<a
+						href="#!/articles/{{content.categoryId}}/{{content.title | removespaces}}/{{content.contentId}}">{{content.title}}</a>
+				</div>
+{{test}}
+				<div class="wpb_text_column wpb_content_element">
+					<div class="wpb_wrapper">
+						<img src="static/images/{{category}}" width="260" height="246"
+							alt="" class="alignleft"
+							ng-repeat="category in categories |categoryImage:content">
+						<p class="capitalized">
+							{{content.contentBody| limitTo : 1100 : 0}} <a
+								href="#!/articles/{{content.categoryId}}/{{content.title | removespaces}}/{{content.contentId}}">.....
+								Read More</a>
+						</p>
+						<!-- | limitTo : limit : begin -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ philosophy -->
+		<!-- list -->
+		<section id="news" class="widget news news-4">
+			<div class="grid">
+				<div class="item"
+					ng-repeat="content in contents.slice(1, articlesLimit)">
+					<h3>
+						<a
+							href="#!/articles/{{content.categoryId}}/{{content.title | removespaces}}/{{content.contentId}}">{{content.title
+							}}</a>
+					</h3>
+					<div class="date">
+						{{content.updatedDate}}<i class="fa fa-comment"><span>3</span></i>
+					</div>
+					<div class="pic">
+						<img src="static/images/{{category}}" alt="{{content.title}}"
+							ng-repeat="category in categories |categoryImage:content">
+						<div class="links">
+							<ul>
+								<li><a
+									href="#!/articles/{{content.categoryId}}/{{content.title | removespaces}}/{{content.contentId}}"
+									class="fa fa-plus"></a></li>
+							</ul>
+						</div>
+					</div>
+					<p>
+						{{content.contentBody| limitTo : 110 : 0}} <a
+							href="#!/articles/{{content.categoryId}}/{{content.title | removespaces}}/{{content.contentId}}">....Read
+							More</a>
+					</p>
+					<div class="cats">
+						Posted in:&nbsp; |&nbsp;<span
+							ng-repeat="category in categories |contentPostedIn:content">
+							<a href="#!/searchcontent/{{category}}">{{category}} </a>&nbsp;
+							|&nbsp;
+						</span>
+					</div>
+				</div>
+			</div>
+
+
+		</section>
+		<section>
+
+			<a href="javascript:void(0)"
+				ng-click="articlesLimit = articlesLimit + 3"
+				data-template="news-four" data-page="2" class="button more"><i
+				class="fa fa-refresh"></i>Load more</a>
+
+		</section>
+	</div>
+
+	<div class="grid-col grid-col-3">
+		<!-- site search -->
+		<form class="widget widget-site-search" ng-submit="search()"
+			ng-controller="searchCtrl">
+			<input type="text" placeholder="Search the site" ng-model="searchkey">
+			<button type="submit" class="button">GO</button>
+		</form>
+		<!--/ site search -->
+
+		<!-- categories -->
+		<section class="widget widget-sevices">
+			<div class="widget-title">Categories</div>
+			<ul>
+				<li ng-repeat="category in categories"><i
+					class="fa fa-bookmark"></i><a
+					href="#!/articles/{{category.name}}/{{category.categoryId}}"><i
+						class="fa fa-angle-right"></i>{{category.name}}</a></li>
+
+			</ul>
+		</section>
+		<!--/ categories -->
+
+	</div>
+</div>

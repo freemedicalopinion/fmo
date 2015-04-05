@@ -1,0 +1,85 @@
+<!-- Main content -->
+<section class="content invoice">
+	<!-- title row -->
+	<div class="row">
+		<div class="col-xs-12">
+			<h2 class="page-header">
+				<i class="fa fa-globe"></i> {{hospital.hospitalName | capitalize}} <span
+					ng-class="{'label-success' : hospital.status=='APPROVED', 'label-danger' : hospital.status=='REJECTED', 'label-warning':hospital.status=='PENDING_APPROVAL','label-primary':hospital.status=='NEW'}"
+					class="label ">{{hospital.status}}</span><small class="pull-right"><a
+					class="btn btn-block btn-primary"
+					ng-controller="manageHospitalController"
+					ng-click="launch('publish')">&nbsp;&nbsp;<i
+						class="fa fa-pencil"></i> Publish Profile&nbsp;&nbsp;
+				</a></small>&nbsp;&nbsp; <small class="pull-right" style="margin-right: 25px;"><a
+					class="btn btn-block btn-primary"
+					ng-controller="manageHospitalController"
+					ng-click="launch('create')">&nbsp;&nbsp;<i class="fa fa-pencil"></i>
+						Manage Hospital Profile&nbsp;&nbsp;
+				</a></small>
+
+			</h2>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- info row -->
+	<div class="row invoice-info">
+		<div class="col-sm-4 invoice-col">
+			<h4>Address</h4>
+			<address>
+				<strong>Address</strong><br> {{hospital.address.address |
+				isNull}}<br> <strong>Country</strong> &nbsp;&nbsp;
+				{{hospital.address.country | countryName:listofcountry |isNull}}<br>
+				<strong>State</strong> &nbsp;&nbsp; {{hospital.address.state
+				|stateName:listofcountry |isNull }}<br> <strong>City</strong>
+				&nbsp;&nbsp; {{hospital.address.city |cityName:listofcountry |
+				isNull}}<br>
+			</address>
+		</div>
+		<!-- /.col -->
+		<div class="col-sm-4 invoice-col">
+			<h4>Contact Numbers</h4>
+			<address>
+				<strong>Phone Number</strong><br> {{hospital.contactNo |
+				isNull}}<br> <strong>Fax Number</strong><br>
+				{{hospital.faxNo | isNull}}<br>
+			</address>
+		</div>
+		<!-- /.col -->
+		<div class="col-sm-4 invoice-col">
+			<h4>Social Media</h4>
+			<address>
+				<strong>Website</strong><br> {{hospital.website | isNull}}<br>
+				<strong>Facebook</strong><br> {{hospital.fbLink | isNull}}<br>
+				<strong>Twitter</strong><br> {{hospital.twitterLink | isNull}}<br>
+			</address>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+
+
+	<div class="row">
+		<div class="col-xs-6">
+			<p class="lead">About Hospital:</p>
+			<p class="text-muted well well-sm no-shadow"
+				style="margin-top: 10px;">{{hospital.aboutHospital |isNull }}</p>
+		</div>
+		<!-- /.col -->
+		<div class="col-xs-6">
+			<p class="lead">Services / Procedures</p>
+			<div class="table-responsive">
+				<table class="table">
+					<tr
+						ng-repeat="procedure in hospital.procedures | procedureName:listOfProcedure">
+						<th style="width: 50%">{{procedure.procedureName}}</th>
+						<td>{{procedure.description | isNull}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->

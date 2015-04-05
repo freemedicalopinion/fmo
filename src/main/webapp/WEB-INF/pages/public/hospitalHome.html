@@ -1,0 +1,109 @@
+<div class="grid-row">
+
+	<div class="wpb_row vc_row-fluid">
+		<div class="vc_span12 wpb_column column_container">
+			<div class="wpb_wrapper">
+				<div
+					class="wpb_text_column wpb_content_element section-headers inline">
+					<div class="wpb_wrapper">
+						<h1>Search</h1>
+						Hospital
+					</div>
+				</div>
+				<div class="wpb_text_column wpb_content_element section-text inline">
+					<div class="wpb_wrapper">
+						<p>
+							<b>Clinico</b> provides responsive and flexible layout. All pages
+							look identically great regardless of the device’s resolution and
+							pixel density.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-include="'SearchHome.html'"></div>
+
+
+	<div class="wpb_row vc_row-fluid">
+		<div class="vc_span12 wpb_column column_container">
+			<div class="wpb_wrapper">
+				<div
+					class="wpb_text_column wpb_content_element section-headers inline">
+					<div class="wpb_wrapper">
+						<h1>Newly Added</h1>
+						Hospital
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- doctors -->
+	<section id="doctors" class="doctors">
+		<div class="grid">
+			<div class="item item1" ng-repeat="hospital in hospitals">
+				<div class="pic">
+					<img src="static/images/{{hospital.logo}}"
+						alt="{{hospital.hospitalName}}">
+					<div class="links">
+						<ul>
+							<li><a href="#!/hospital/{{hospital.hospitalId}}" class="fa fa-skype"></a></li>
+						</ul>
+					</div>
+				</div>
+				<h3>{{hospital.hospitalName}}</h3>
+				<p>
+					Ophthalmologist <span ng-controller="StarCtrl"
+						style="font-size: 22px;"> <span star-ratingstatic
+						rating-value="2" max="5"></span>
+					</span>
+				</p>
+
+			</div>
+		</div>
+	</section>
+	<!--/ doctors -->
+
+	<div class="grid-row-sep"></div>
+
+	<div class="wpb_row vc_row-fluid">
+		<div class="vc_span12 wpb_column column_container">
+			<div class="wpb_wrapper">
+				<div
+					class="wpb_text_column wpb_content_element section-headers inline">
+					<div class="wpb_wrapper">
+						<h1>New Reviews of</h1>
+						Hospital
+					</div>
+				</div>
+				<div class="wpb_text_column wpb_content_element section-text">
+					<div class="wpb_wrapper">
+						<p>
+							<b>Clinico</b> comes with six predefined color schemes. Take a
+							look and make a choice – easily adjust one of the predefined
+							schemes!
+						</p>
+					</div>
+				</div>
+				<!-- testimonial -->
+				<div class="wpb_content_element">
+					<div class="testimonial">
+						<div class="clearfix">
+							<img src="pic/testimonial-1.jpg" width="96" height="96" alt="">
+							<p>Sed purus purus, tincidunt eget malesuada et, molestie ut
+								eros. Fusce blandit, sapien eu sollicitudin consectetur, ligula
+								tellus pulvinar. Urna, quis facilisis magna dolor ac lacus.
+								Mauris congue nec nisi sit amet malesuada. Vivamus sodales nunc
+								et pulvinar bibendum. Morbi quis erat non odio suscipit.</p>
+						</div>
+						<div class="author">Kate White, The flu</div>
+					</div>
+				</div>
+				<!--/ testimonial -->
+
+			</div>
+		</div>
+	</div>
+</div>

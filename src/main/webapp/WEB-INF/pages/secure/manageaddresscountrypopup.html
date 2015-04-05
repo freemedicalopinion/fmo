@@ -1,0 +1,29 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span> Add Country
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="manageCountryDialog" novalidate role="form">
+				<div style="color: red">{{errorMessage}}</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageCountryDialog.name.$dirty && manageCountryDialog.name.$invalid || !isUnique]">
+					<label class="control-label" for="name">Country Name:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="country.countryName" value="" required><span
+						class="help-block">Enter Country Name.</span> <input type="hidden"
+						ng-model="country.countryId">
+				</div>
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="save()"
+					ng-disabled="(manageCountryDialog.$dirty && manageCountryDialog.$invalid) || manageCountryDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

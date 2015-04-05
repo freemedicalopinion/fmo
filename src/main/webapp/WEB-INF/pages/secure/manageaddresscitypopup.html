@@ -1,0 +1,32 @@
+<div class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<span class="glyphicon glyphicon-star"></span> Add Procedure
+				</h4>
+			</div>
+			<div class="modal-body banner" style="overflow: auto;" banner="250">
+				<ng-form name="manageCityDialog" novalidate role="form">
+				<div style="color: red">{{errorMessage}}</div>
+				<div class="form-group input-group-lg"
+					ng-class="{true:'has-error'}[manageCityDialog.name.$dirty && manageCityDialog.name.$invalid || !isUnique]">
+					<label class="control-label" for="name">City Name:</label><input
+						type="text" class="form-control" name="name" id="name"
+						ng-model="country.states[0].cities[0].cityName" value="" required><span
+						class="help-block">Enter City Name.</span> <input
+						type="hidden" ng-model="country.countryId" /> <input
+						type="hidden" ng-model="country.states[0].stateId" />
+				</div>
+
+
+				</ng-form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="save()"
+					ng-disabled="(manageCityDialog.$dirty && manageCityDialog.$invalid) || manageCityDialog.$pristine">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

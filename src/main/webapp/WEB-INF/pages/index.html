@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" class="ng-app: freemedicalopinion;"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title ng-bind="metaservice.metaTitle()"></title>
+    <meta name="description" content="{{ metaservice.metaDescription() }}" />
+    <meta name="keywords" content="{{ metaservice.metaKeywords() }}" />
+
+<!-- metas -->
+<meta charset="utf-8">
+<meta name="author"
+	content="http://themeforest.net/user/CreativeWS/portfolio">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<!--/ metas -->
+
+<!-- styles -->
+<link rel="stylesheet" type="text/css"
+	href="secure/resources/css/font-awesome.css">
+<link rel="stylesheet" type="text/css"
+	href="secure/resources/css/styles.css">
+<link rel="stylesheet" type="text/css"
+	href="secure/resources/css/color-blue.css">
+<!--/ styles -->
+
+</head>
+
+<body ng-app="app">
+	<div class="page">
+		<!-- page header -->
+		<header class="page-header main-page">
+			<!-- logo -->
+			<section id="logo" class="logo">
+				<div>
+					<a href="#!/"><img src="secure/resources/img/blue/logo.png"
+						width="190" height="50" alt="Clinico"></a>
+				</div>
+			</section>
+			<!--/ logo -->
+
+			<!-- main nav -->
+			<nav class="main-nav">
+				<ul>
+					<li><a href="#!/" ng-class="{active:part == 'home'}"><i
+							class="fa fa-plus"></i>Home</a></li>
+					<li><a href="#!/articles"
+						ng-class="{active:part == 'article'}"><i class="fa fa-plus"></i>Articles</a></li>
+					<li><a href="#!/doctors" ng-class="{active:part == 'doctors'}"><i
+							class="fa fa-plus"></i>Doctors</a></li>
+					<li><a href="#!/hospitals"
+						ng-class="{active:part == 'hospitals'}"><i class="fa fa-plus"></i>Hospitals</a></li>
+					<li class="right" ng-show="loginData.login != true"><a
+						href="#!/login" ng-class="{active:part == 'login'}"><i
+							class="fa fa-plus"></i>Login</a></li>
+
+					<li class="right" ng-show="loginData.login == true"><a
+						href="secure/logout"><i class="fa fa-plus"></i>Logout</a></li>
+
+				</ul>
+			</nav>
+			<!--/ main nav -->
+
+			<!-- mobile nav -->
+			<nav id="mobile-main-nav" class="mobile-main-nav">
+				<ul>
+					<li><a href="#!/" ng-class="{active:part == 'home'}"><i
+							class="fa fa-plus"></i>Home</a></li>
+					<li><a href="#!/articles"
+						ng-class="{active:part == 'article'}"><i class="fa fa-plus"></i>Articles</a></li>
+					<li><a href="#!/doctors" ng-class="{active:part == 'doctors'}"><i
+							class="fa fa-plus"></i>Doctors</a></li>
+					<li><a href="#!/hospitals"
+						ng-class="{active:part == 'hospitals'}"><i class="fa fa-plus"></i>Hospitals</a></li>
+					<li class="right" ng-show="loginData.login != true"><a
+						href="#!/login" ng-class="{active:part == 'login'}"><i
+							class="fa fa-plus"></i>Login</a></li>
+
+					<li class="right" ng-show="loginData.login == true"><a
+						href="secure/logout"><i class="fa fa-plus"></i>Logout</a></li>
+
+				</ul>
+			</nav>
+			<!--/ mobile nav -->
+		</header>
+		<!--/ page header -->
+
+		<!-- page title -->
+		<section class="page-title">
+			<div class="grid-row clearfix">
+				<h1>styled content items</h1>
+				<nav class="bread-crumbs">
+					<a href="index-2.html">Home</a>&nbsp;&nbsp;<i
+						class="fa fa-angle-right"></i>&nbsp; <a
+						href="features-accordion.html">Styled Content Items</a>&nbsp;&nbsp;<i
+						class="fa fa-angle-right"></i>&nbsp; <a href="#">Service</a>
+				</nav>
+			</div>
+		</section>
+		<!--/ page title -->
+
+		<!-- page content -->
+		<main class="page-content"> <!-- main content -->
+
+		<div style="position: relative">
+			<div style="width: 100%" ng-view
+				ng-animate="{enter: 'active', leave: ''}"></div>
+		</div>
+		</main>
+		<!--/ page content -->
+
+	</div>
+
+</body>
+<!-- page footer -->
+<footer class="page-footer">
+	<a href="#" id="top-link" class="top-link"><i
+		class="fa fa-angle-double-up"></i></a>
+
+	<div class="grid-row">
+		<div class="grid-col grid-col-3">
+			<!-- last news -->
+			<section class="widget-alt last-news">
+				<div class="widget-icon"></div>
+				<div class="widget-title">Clinico</div>
+				<ul>
+					<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Morbi sollicitudin justo non odio molestie, sed venenatis elit,
+						consectetur adipiscing.</li>
+					<li>Donec quis condimentum leo, et congue dolor. Integer
+						auctor facilisis odio. Duis vitae nibh tristique, consectetur
+						lacus a, facilisis rutrum enim.</li>
+					<li>Cras fermentum interdum dapibus. Maecenas imperdiet,
+						consectetur adipiscing magna nec odio cursus, vitae consequat
+						ante.</li>
+				</ul>
+			</section>
+			<!--/ last news -->
+		</div>
+
+		<div class="grid-col grid-col-3">
+			<!-- location -->
+			<section class="widget-alt location">
+				<div class="widget-icon"></div>
+				<div class="widget-title">Location</div>
+				<address>Address will be appear here, some details here
+					City Name, Country.</address>
+				<ul>
+					<li><i class="fa fa-phone"></i>(907) 555-55555</li>
+					<li><i class="fa fa-at">@</i>company@youremail.com</li>
+					<li><i class="fa fa-skype"></i>Medical Skype Name</li>
+				</ul>
+				<nav>
+					<a href="#" class="fa fa-twitter"></a> <a href="#"
+						class="fa fa-facebook"></a> <a href="#" class="fa fa-instagram"></a>
+				</nav>
+			</section>
+			<!--/ location -->
+		</div>
+
+		<div class="grid-col grid-col-3">
+			<!-- last news -->
+			<section class="widget-alt recent-posts">
+				<div class="widget-icon"></div>
+				<div class="widget-title">Recent Posts</div>
+				<ul>
+					<li><a href="#"><img src="resources/pic/post/1.png"
+							width="80" height="80" alt=""></a>
+						<p>
+							<a href="#">New study links lutein with eye health benefits,
+								consectetur adipiscing</a><br>5 months ago
+						</p></li>
+					<li><a href="#"><img src="resources/pic/post/2.png"
+							width="80" height="80" alt=""></a>
+						<p>
+							<a href="#">Pets may reduce risk of heart disease, et congue
+								dolor heart</a><br>8 months ago
+						</p></li>
+					<li><a href="#"><img src="resources/pic/post/3.png"
+							width="80" height="80" alt=""></a>
+						<p>
+							<a href="#">Discoveries offer a new explanation for diabetes,
+								consectetur</a><br>10 months ago
+						</p></li>
+				</ul>
+			</section>
+			<!--/ last news -->
+		</div>
+
+		<div class="grid-col grid-col-3">
+			<!-- work time -->
+			<section class="widget-alt work-time">
+				<div class="widget-icon"></div>
+				<dl>
+					<dt>Mon</dt>
+					<dd>08:00 am - 12:00 pm</dd>
+					<dt>Tue</dt>
+					<dd>01:00 am - 05:00 pm</dd>
+					<dt>Wed</dt>
+					<dd>Free day</dd>
+					<dt>Thu</dt>
+					<dd>08:00 am - 12:00 pm</dd>
+					<dt>Fri</dt>
+					<dd>08:00 am - 12:00 pm</dd>
+					<dt>Sat</dt>
+					<dd>08:00 am - 12:00 pm</dd>
+					<dt>Sun</dt>
+					<dd>Free day</dd>
+				</dl>
+				<a href="#" class="button">Make an Appointment</a>
+			</section>
+			<!--/ work time -->
+		</div>
+	</div>
+</footer>
+<!--/ page footer -->
+
+<!-- copyrights -->
+<div class="copyrights">Copyrights ©2014: Clinico - Responsive
+	Medical and Health Template</div>
+<!--/ copyrights -->
+<!-- add javascripts -->
+<script src="secure/resources/js/thirdpartyjs/angular.min.js"></script>
+<script src="secure/resources/js/freemedicalopinionjs/app/app.js"></script>
+<script
+	src="secure/resources/js/freemedicalopinionjs/controller/commonController.js"></script>
+<script
+	src="secure/resources/js/freemedicalopinionjs/controller/registrationController.js"></script>
+	<script
+	src="secure/resources/js/freemedicalopinionjs/controller/addCommentController.js"></script>
+	<script
+	src="secure/resources/js/freemedicalopinionjs/controller/categoryHomeController.js"></script>
+<script
+	src="secure/resources/js/freemedicalopinionjs/service/limitLength.js"></script>
+	<script
+	src="secure/resources/js/freemedicalopinionjs/service/metaService.js"></script>
+	<script
+	src="secure/resources/js/freemedicalopinionjs/service/CustomService.js"></script>
+
+
+</html>

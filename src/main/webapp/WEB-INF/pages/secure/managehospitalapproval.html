@@ -1,0 +1,116 @@
+<section class="content">
+	<!-- MAILBOX BEGIN -->
+	<div class="mailbox row">
+		<div class="col-xs-12">
+			<div class="box box-solid">
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-4">
+							<div class="box-header">
+								<i class="fa fa-inbox"></i>
+								<h3 class="box-title">Manage Hospital Approval</h3>
+							</div>
+							<!-- Navigation - folders-->
+							<div style="margin-top: 15px;">
+								<ul class="nav nav-pills nav-stacked">
+									<li class="header">Status</li>
+									<li ng-repeat="status in listOfStatuses"
+										ng-class="{active:status==$parent.activeStatus}"><a
+										href="#" ng-click="$parent.activeStatus=status"
+										onclick="return false;"> <i class="fa fa-inbox"></i>
+											{{status}}
+									</a></li>
+
+								</ul>
+							</div>
+						</div>
+						<!-- /.col (LEFT) -->
+						<div class="col-md-9 col-sm-8">
+							<div class="row pad">
+								<div class="col-sm-6">
+									<label style="margin-right: 10px;">
+										<div class="icheckbox_minimal-blue" aria-checked="false"
+											aria-disabled="false" style="position: relative;">
+											<input type="checkbox" id="check-all"
+												style="position: absolute; opacity: 0;">
+											<ins class="iCheck-helper"
+												style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+										</div>
+									</label>
+
+
+								</div>
+								<div class="col-sm-6 search-form">
+									<form action="#" class="text-right">
+										<div class="input-group">
+											<input type="text" class="form-control input-sm"
+												placeholder="Search">
+											<div class="input-group-btn">
+												<button type="submit" name="q"
+													class="btn btn-sm btn-primary">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- /.row -->
+
+							<div class="box-body table-responsive no-padding">
+								<table class="table table-hover">
+									<tbody>
+										<tr>
+
+											<th>Name</th>
+											<th>Address</th>
+											<th>City</th>
+											<th>State(Country)</th>
+											<th>Action</th>
+										</tr>
+										<tr ng-repeat="hospital in hospitals"
+											ng-show="hospital.status==$parent.activeStatus">
+
+											<td>{{hospital.hospitalName | capitalize}}</td>
+											<td>{{hospital.address.address}}</td>
+											<td>{{hospital.address.city |cityName:listofcountry }}</td>
+											<td>{{hospital.address.state |stateName:listofcountry}}
+												( {{hospital.address.country | countryName:listofcountry}})</td>
+											<td ng-controller="manageHospitalApproval"><span
+												title="Open this content"> <a
+													ng-click="launch('create',hospital)"><i
+														class="fa fa-sign-in"></i></a>
+											</span></td>
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.col (RIGHT) -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<div class="pull-right">
+						<small>Showing 1-12/1,240</small>
+						<button class="btn btn-xs btn-primary">
+							<i class="fa fa-caret-left"></i>
+						</button>
+						<button class="btn btn-xs btn-primary">
+							<i class="fa fa-caret-right"></i>
+						</button>
+					</div>
+				</div>
+				<!-- box-footer -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col (MAIN) -->
+	</div>
+	<!-- MAILBOX END -->
+
+</section>

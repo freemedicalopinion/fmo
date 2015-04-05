@@ -1,0 +1,305 @@
+<div class="grid-row">
+	<div class="grid-col grid-col-9">
+		<section class="single-staff">
+			<div class="item">
+				<div class="wrapper">
+					<div class="pic">
+						<img src="pic/staff_item-1.png" alt="Dr. Earlene Milone"
+							style="width: 150px; height: 140px;">
+					</div>
+				</div>
+				<div class="widget-title">{{hospital.hospitalName |
+					capitalize}}</div>
+				<span>&nbsp;&nbsp;<i class="fa fa-hospital-o"
+					style="font-size: 16px;"></i>&nbsp;&nbsp; #10 Reviews
+				</span> <span>&nbsp;&nbsp; <a ng-click="scrollTo('addReview')">Add
+						Review</a>
+				</span>
+				<div>
+					<div ng-controller="StarCtrl" style="font-size: 22px;">
+						<div star-ratingstatic rating-value="2" max="5"></div>
+					</div>
+					<div>
+						<b>{{hospital.address.address | isNull}}</b>
+					</div>
+					<div>
+						<b>{{hospital.address.city |cityName:listofcountry | isNull}}</b>
+					</div>
+					<span><b>{{hospital.address.state
+							|stateName:listofcountry |isNull }} ({{hospital.address.country |
+							countryName:listofcountry |isNull}})</b></span>
+					<p>
+						{{hospital.aboutHospital |isNull }}<a href="">....Read More</a>
+					</p>
+					<div class="cats_group">
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-home"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;departments:</span> hard coded
+							need to fix
+						</div>
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-file-o"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;Services:</span> Surgeon
+						</div>
+
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-ambulance"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;Ambulance Service:</span> hard
+							coded need to fix
+						</div>
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-calendar"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;workingdays:</span> hard coded
+							need to fix
+						</div>
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-phone"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;Contact Numbers:</span>
+							{{hospital.contactNo | isNull}}
+						</div>
+						<div class="cats">
+							<span class="cats_section_name"><i
+								class="fa fa-phone-square" style="font-size: 16px;"></i>&nbsp;&nbsp;Fax
+								Numbers:</span>{{hospital.faxNo | isNull}}
+						</div>
+						<div class="cats">
+							<span class="cats_section_name">Website:</span>
+							{{hospital.website | isNull}}
+						</div>
+						<div class="cats">
+							<span class="cats_section_name"><i class="fa fa-trophy"
+								style="font-size: 16px;"></i>&nbsp;&nbsp;Awards:</span> hard coded need
+							to fix
+						</div>
+						<div class="cats">
+							<span class="cats_section_name">Social Media:</span> <a
+								style="margin-left: 15px;"><i class="fa fa-facebook"
+								style="font-size: 16px;"></i></a><a style="margin-left: 15px;"><i
+								class="fa fa-twitter" style="font-size: 16px;"></i></a>
+						</div>
+					</div>
+				</div>
+		</section>
+		<section id="addReview">
+			<div class="widget-title" style="margin-top: 20px;">Rate this
+				hospital</div>
+			<div class="vc_row-fluid">
+				<div class="vc_span6">
+					<div class="milestone clearfix">
+						<div class="icon">
+							<i class="fa fa-users"></i>
+						</div>
+						<div class="title">
+							<div>
+								<div star-rating rating-value='rating' max="5"
+									on-rating-selected="review.staff=rating"></div>
+
+							</div>
+						</div>
+						Rate the Staff
+					</div>
+				</div>
+				<div class="vc_span6">
+					<div class="milestone clearfix">
+						<div class="icon">
+							<i class="fa fa-trash-o"></i>
+						</div>
+						<div class="title">
+							<div ng-controller="StarCtrl">
+								<div star-rating rating-value="rating" max="5"
+									on-rating-selected="review.cleanliness=rating"></div>
+
+							</div>
+						</div>
+						Cleanliness of Hospital
+					</div>
+				</div>
+			</div>
+			<div class="vc_row-fluid">
+				<div class="vc_span6">
+					<div class="milestone milestone-alt clearfix">
+						<div class="icon">
+							<i class="fa fa-ambulance"></i>
+						</div>
+						<div class="title">
+							<div ng-controller="StarCtrl">
+								<div star-rating rating-value="rating" max="5"
+									on-rating-selected="review.service=rating"></div>
+
+							</div>
+						</div>
+						Rate the Services of Hospital
+					</div>
+				</div>
+				<div class="vc_span6">
+					<div class="milestone milestone-alt clearfix">
+						<div class="icon">
+							<i class="fa fa-rupee"></i>
+						</div>
+						<div class="title">
+							<div ng-controller="StarCtrl">
+								<div star-rating rating-value="rating" max="5"
+									on-rating-selected="review.cost=rating"></div>
+
+							</div>
+						</div>
+						Value
+					</div>
+				</div>
+			</div>
+			<!--/ milestones -->
+
+			<!-- add comment -->
+			<section class="widget add-comment">
+				<form ng-submit="addreview()">
+					<div style="color: red" ng-show="errorflag">{{error}}</div> <input
+						type="checkbox" ng-model="review.recommended"
+						style="margin-left: 0px; float: left;">Recommend to some
+					one
+					<textarea rows="6" placeholder="Your Message (required)"
+						style="height: 65px;" ng-model="review.comment"></textarea>
+					<button type="submit" class="button">Post Review</button>
+					<span ng-show="loginData.login == true">&nbsp;&nbsp;&nbsp;&nbsp;hello
+						, {{loginData.fname}} {{loginData.lname}}</span> <span
+						ng-show="loginData.login != true"> <a
+						onclick="window.open('{{loginData.facebookLoginUrl}}','mywindow','height=400,width=400');">&nbsp;&nbsp;Login
+							with facebook</a>
+					</span>
+
+				</form>
+			</section>
+			<!--/ add comment -->
+		</section>
+
+
+
+		<section>
+			<div class="widget-title" style="margin-top: 20px;">Ratings of
+				this Hospital</div>
+			<div ng-repeat="reviewdata in listofreviews"
+				style="margin-top: 25px;">
+				<div class="vc_row-fluid">
+					<div class="vc_span6">
+						<div class="milestone clearfix">
+							<div class="icon">
+								<i class="fa fa-users"></i>
+							</div>
+							<div class="title">
+								<div>
+									<div star-ratingstatic rating-value='reviewdata.staff' max="5"></div>
+
+								</div>
+							</div>
+							Rate the Staff
+						</div>
+					</div>
+					<div class="vc_span6">
+						<div class="milestone clearfix">
+							<div class="icon">
+								<i class="fa fa-trash-o"></i>
+							</div>
+							<div class="title">
+								<div>
+									<div star-ratingstatic rating-value="reviewdata.cleanliness"
+										max="5"></div>
+
+								</div>
+							</div>
+							Cleanliness of Hospital
+						</div>
+					</div>
+				</div>
+				<div class="vc_row-fluid">
+					<div class="vc_span6">
+						<div class="milestone milestone-alt clearfix">
+							<div class="icon">
+								<i class="fa fa-ambulance"></i>
+							</div>
+							<div class="title">
+								<div>
+									<div star-ratingstatic rating-value="reviewdata.service"
+										max="5"></div>
+
+								</div>
+							</div>
+							Rate the Services of Hospital
+						</div>
+					</div>
+					<div class="vc_span6">
+						<div class="milestone milestone-alt clearfix">
+							<div class="icon">
+								<i class="fa fa-rupee"></i>
+							</div>
+							<div class="title">
+								<div ng-controller="StarCtrl">
+									<div star-ratingstatic rating-value="reviewdata.cost" max="5"></div>
+
+								</div>
+							</div>
+							Value
+						</div>
+					</div>
+				</div>
+				<!--/ milestones -->
+				<div class="wpb_alert wpb_alert_alt"
+					ng-class="{'wpb_alert_alt_error':reviewdata.recommended == false,'wpb_alert_alt_confirm':reviewdata.recommended == true}">
+					<h2>{{reviewdata.comment}}</h2>
+					<p>{{reviewdata.createdDate}}</p>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="grid-col grid-col-3">
+		<!-- site search -->
+		<form action="#" class="widget widget-site-search">
+			<input type="text" placeholder="Search the site">
+			<button type="submit" class="button">GO</button>
+		</form>
+		<!--/ site search -->
+
+		<!-- comments -->
+		<section class="widget widget-comments">
+			<div class="widget-title">Doctors of This Hospital</div>
+			<div id="comments-carousel" class="owl-carousel">
+				<div class="item">
+					<ul>
+						<li><img src="pic/doctor-1.jpg" alt="">
+							<div class="author">
+								<a href="#">Amanda Kliens</a>
+							</div>
+							<p>
+								Blandit vel velit nec, varius imperdiet dolor donec.<br> <span
+									class="date">Jul 27th, 2014</span>
+							</p></li>
+						<li><img src="pic/doctor-2.jpg" alt="">
+							<div class="author">
+								<a href="#">Henrietta Borjas</a>
+							</div>
+							<p>
+								Blandit vel velit nec, varius imperdiet dolor donec.<br> <span
+									class="date">Jul 24th, 2014</span>
+							</p></li>
+						<li><img src="pic/doctor-3.jpg" alt="">
+							<div class="author">
+								<a href="#">Normand Wehling</a>
+							</div>
+							<p>
+								Blandit vel velit nec, varius imperdiet dolor donec.<br> <span
+									class="date">Jul 20th, 2014</span>
+							</p></li>
+						<li><img src="pic/doctor-4.jpg" alt="">
+							<div class="author">
+								<a href="#">Trevor Smith</a>
+							</div>
+							<p>
+								Blandit vel velit nec, varius imperdiet dolor donec.<br> <span
+									class="date">Jul 11th, 2014</span>
+							</p></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!--/ comments -->
+	</div>
+</div>
